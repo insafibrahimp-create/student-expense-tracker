@@ -263,6 +263,12 @@
             justify-content: center;
         }
 
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
         .table-wrapper {
             overflow-x: auto;
             border: 1px solid var(--border);
@@ -376,6 +382,15 @@
                 grid-template-columns: 1fr;
             }
 
+            .form-buttons {
+                width: 100%;
+            }
+
+            .form-buttons .primary-button,
+            .form-buttons .secondary-button {
+                flex: 1;
+            }
+
             .summary-grid {
                 grid-template-columns: 1fr;
             }
@@ -465,7 +480,10 @@
                     <small class="error-message" id="category-error"></small>
                 </div>
 
-                <button type="submit" class="primary-button" id="submit-button">Add Expense</button>
+                <div class="form-buttons">
+                    <button type="submit" class="primary-button" id="submit-button">Add Expense</button>
+                    <button type="button" class="secondary-button" id="clear-button">Clear</button>
+                </div>
             </form>
         </section>
 
@@ -525,6 +543,7 @@
         const emptyState = document.getElementById("empty-state");
         const loadingState = document.getElementById("loading-state");
         const submitButton = document.getElementById("submit-button");
+        const clearButton = document.getElementById("clear-button");
 
         let expenses = [];
 
@@ -721,6 +740,12 @@
             }
 
             await addExpense(title, amount, category);
+        });
+
+        clearButton.addEventListener("click", function () {
+            expenseForm.reset();
+            ExpenseUI.clearValidationMessages();
+            titleInput.focus();
         });
 
         refreshButton.addEventListener("click", loadExpenses);
