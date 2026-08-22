@@ -298,7 +298,8 @@ a {
 ========================================= */
 
 .primary-button,
-.secondary-button {
+.secondary-button,
+.clear-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -335,7 +336,8 @@ a {
 }
 
 .primary-button:active,
-.secondary-button:active {
+.secondary-button:active,
+.clear-button:active {
     transform: translateY(1px);
 }
 
@@ -354,6 +356,23 @@ a {
 .secondary-button:hover {
     border-color: #cbd5e1;
     background: var(--surface-soft);
+}
+
+
+/* =========================================
+   Clear Button
+========================================= */
+
+.clear-button {
+    border: 1px solid #fecaca;
+
+    background: #ffffff;
+    color: var(--danger);
+}
+
+.clear-button:hover {
+    background: #fef2f2;
+    border-color: #fca5a5;
 }
 
 
@@ -568,7 +587,8 @@ a {
         grid-template-columns: 1fr 1fr;
     }
 
-    .expense-form .primary-button {
+    .expense-form .primary-button,
+    .expense-form .clear-button {
         width: 100%;
     }
 }
@@ -622,6 +642,11 @@ a {
 
     .expense-form {
         grid-template-columns: 1fr;
+    }
+
+    .expense-form .primary-button,
+    .expense-form .clear-button {
+        width: 100%;
     }
 
     .table-wrapper {
