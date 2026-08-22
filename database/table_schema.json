@@ -1,0 +1,14 @@
+{
+  "TableName": "StudentExpenses",
+  "AttributeDefinitions": [
+    { "AttributeName": "expenseId", "AttributeType": "S" }
+  ],
+  "KeySchema": [
+    { "AttributeName": "expenseId", "KeyType": "HASH" }
+  ],
+  "BillingMode": "PAY_PER_REQUEST",
+  "Tags": [
+    { "Key": "Project", "Value": "StudentExpenseTracker" },
+    { "Key": "Owner", "Value": "ARSHAD AHMED S" }
+  ]
+}

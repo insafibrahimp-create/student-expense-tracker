@@ -1,0 +1,5 @@
+Add DynamoDB StudentExpenses project files
+
+Includes: database schema, seed script, tests, scan/filter demo, docs, .env.example, requirements
+
+Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
