@@ -556,12 +556,10 @@
         <section class="section" id="add-expense">
 
             <div class="section-heading">
-
                 <div>
                     <p class="eyebrow">ADD TRANSACTION</p>
                     <h2>Add a new expense</h2>
                 </div>
-
             </div>
 
 
@@ -584,8 +582,8 @@
 
                     <small
                         class="error-message"
-                        id="title-error">
-                    </small>
+                        id="title-error"
+                    ></small>
 
                 </div>
 
@@ -609,8 +607,8 @@
 
                     <small
                         class="error-message"
-                        id="amount-error">
-                    </small>
+                        id="amount-error"
+                    ></small>
 
                 </div>
 
@@ -668,8 +666,8 @@
 
                     <small
                         class="error-message"
-                        id="category-error">
-                    </small>
+                        id="category-error"
+                    ></small>
 
                 </div>
 
@@ -1127,7 +1125,10 @@
 
             return String(value)
 
-                .replace(/&/g, "&amp;")
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
 
                 .replace(
                     /</g,
@@ -1140,7 +1141,7 @@
                 )
 
                 .replace(
-                    /\"/g,
+                    /"/g,
                     "&quot;"
                 )
 
@@ -1328,6 +1329,7 @@
                             },
 
                             body: JSON.stringify({
+
                                 title:
                                     title.trim(),
 
