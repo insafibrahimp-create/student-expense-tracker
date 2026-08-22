@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Student Expense Tracker</title>
+
     <style>
         :root {
             --bg: #f5f7fb;
@@ -31,7 +33,8 @@
         }
 
         body {
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                BlinkMacSystemFont, "Segoe UI", sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
@@ -52,6 +55,8 @@
             width: min(1120px, calc(100% - 40px));
             margin: 0 auto;
         }
+
+        /* Navbar */
 
         .navbar {
             background: var(--surface);
@@ -95,6 +100,8 @@
             color: var(--primary);
         }
 
+        /* Hero */
+
         .hero {
             padding: 72px 0 42px;
         }
@@ -120,6 +127,8 @@
             color: var(--muted);
             font-size: 1.05rem;
         }
+
+        /* Summary */
 
         .summary-grid {
             display: grid;
@@ -154,6 +163,8 @@
             font-size: 0.82rem;
         }
 
+        /* Sections */
+
         .section {
             margin-top: 34px;
             background: var(--surface);
@@ -176,9 +187,11 @@
             letter-spacing: -0.025em;
         }
 
+        /* Form */
+
         .expense-form {
             display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr auto;
+            grid-template-columns: 1.4fr 1fr 1fr auto auto;
             gap: 16px;
             align-items: end;
         }
@@ -205,7 +218,8 @@
             background: var(--surface-soft);
             color: var(--text);
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .form-group input:focus,
@@ -226,24 +240,30 @@
             box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08) !important;
         }
 
+        /* Buttons */
+
         .primary-button,
-        .secondary-button {
-            border: none;
+        .secondary-button,
+        .clear-button {
             border-radius: 12px;
             cursor: pointer;
             padding: 12px 18px;
             font-weight: 700;
-            transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+            transition:
+                transform 0.2s ease,
+                opacity 0.2s ease,
+                background 0.2s ease;
         }
 
         .primary-button {
             background: var(--primary);
             color: #fff;
+            border: none;
             min-height: 46px;
         }
 
-        .primary-button:hover,
-        .secondary-button:hover {
+        .primary-button:hover {
+            background: var(--primary-dark);
             transform: translateY(-1px);
         }
 
@@ -262,6 +282,29 @@
             align-items: center;
             justify-content: center;
         }
+
+        .secondary-button:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Clear Button */
+
+        .clear-button {
+            min-height: 46px;
+            background: #ffffff;
+            color: var(--danger);
+            border: 1px solid #fecaca;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clear-button:hover {
+            background: #fef2f2;
+            transform: translateY(-1px);
+        }
+
+        /* Table */
 
         .table-wrapper {
             overflow-x: auto;
@@ -303,6 +346,8 @@
             color: var(--text);
         }
 
+        /* States */
+
         .state-message {
             display: grid;
             place-items: center;
@@ -324,6 +369,8 @@
             display: none !important;
         }
 
+        /* Toast */
+
         .toast {
             position: fixed;
             right: 24px;
@@ -338,7 +385,9 @@
             opacity: 0;
             transform: translateY(12px);
             pointer-events: none;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease;
             z-index: 200;
         }
 
@@ -354,6 +403,8 @@
         .toast.error {
             background: var(--danger);
         }
+
+        /* Footer */
 
         .footer {
             padding: 28px 0 40px;
@@ -371,9 +422,30 @@
             font-size: 0.9rem;
         }
 
+        /* Responsive */
+
+        @media (max-width: 1000px) {
+            .expense-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-group:first-child {
+                grid-column: span 2;
+            }
+
+            .primary-button,
+            .clear-button {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 840px) {
             .expense-form {
                 grid-template-columns: 1fr;
+            }
+
+            .form-group:first-child {
+                grid-column: span 1;
             }
 
             .summary-grid {
@@ -385,30 +457,80 @@
                 flex-direction: column;
             }
         }
+
+        @media (max-width: 600px) {
+            .container {
+                width: min(100% - 24px, 1120px);
+            }
+
+            .nav-content {
+                flex-direction: column;
+                justify-content: center;
+                padding: 14px 0;
+            }
+
+            .nav-links {
+                gap: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 45px 0 30px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
+
 <body>
+
+    <!-- Navigation -->
     <header class="navbar">
         <div class="container nav-content">
-            <a href="#dashboard" class="logo">Student Expense Tracker</a>
+
+            <a href="#dashboard" class="logo">
+                Student Expense Tracker
+            </a>
+
             <nav class="nav-links">
                 <a href="#dashboard">Dashboard</a>
                 <a href="#add-expense">Add Expense</a>
                 <a href="#expenses">Expenses</a>
             </nav>
+
         </div>
     </header>
 
+
+    <!-- Main Content -->
     <main class="container">
+
+        <!-- Hero -->
         <section class="hero" id="dashboard">
+
             <div>
                 <p class="eyebrow">PERSONAL FINANCE</p>
-                <h1>Track your student expenses.</h1>
-                <p class="hero-text">Keep your spending organized and understand where your money goes.</p>
+
+                <h1>
+                    Track your student expenses.
+                </h1>
+
+                <p class="hero-text">
+                    Keep your spending organized and understand
+                    where your money goes.
+                </p>
             </div>
+
         </section>
 
+
+        <!-- Summary Cards -->
         <section class="summary-grid">
+
             <article class="summary-card">
                 <p class="card-label">Total Expenses</p>
                 <h2 id="expense-count">0</h2>
@@ -426,305 +548,927 @@
                 <h2 id="highest-expense">₹0.00</h2>
                 <span>Largest single expense</span>
             </article>
+
         </section>
 
+
+        <!-- Add Expense -->
         <section class="section" id="add-expense">
+
             <div class="section-heading">
+
                 <div>
                     <p class="eyebrow">ADD TRANSACTION</p>
                     <h2>Add a new expense</h2>
                 </div>
+
             </div>
 
+
             <form id="expense-form" class="expense-form" novalidate>
+
+                <!-- Title -->
                 <div class="form-group">
-                    <label for="title">Expense Title</label>
-                    <input type="text" id="title" name="title" placeholder="e.g. College Canteen" required>
-                    <small class="error-message" id="title-error"></small>
+
+                    <label for="title">
+                        Expense Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. College Canteen"
+                        required
+                    >
+
+                    <small
+                        class="error-message"
+                        id="title-error">
+                    </small>
+
                 </div>
 
+
+                <!-- Amount -->
                 <div class="form-group">
-                    <label for="amount">Amount</label>
-                    <input type="number" id="amount" name="amount" placeholder="e.g. 120" min="0.01" step="0.01" required>
-                    <small class="error-message" id="amount-error"></small>
+
+                    <label for="amount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        name="amount"
+                        placeholder="e.g. 120"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+
+                    <small
+                        class="error-message"
+                        id="amount-error">
+                    </small>
+
                 </div>
 
+
+                <!-- Category -->
                 <div class="form-group">
-                    <label for="category">Category</label>
-                    <select id="category" name="category" required>
-                        <option value="">Select category</option>
-                        <option value="Food">Food</option>
-                        <option value="Travel">Travel</option>
-                        <option value="Education">Education</option>
-                        <option value="Shopping">Shopping</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Bills">Bills</option>
-                        <option value="Health">Health</option>
-                        <option value="Other">Other</option>
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Food">
+                            Food
+                        </option>
+
+                        <option value="Travel">
+                            Travel
+                        </option>
+
+                        <option value="Education">
+                            Education
+                        </option>
+
+                        <option value="Shopping">
+                            Shopping
+                        </option>
+
+                        <option value="Entertainment">
+                            Entertainment
+                        </option>
+
+                        <option value="Bills">
+                            Bills
+                        </option>
+
+                        <option value="Health">
+                            Health
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
                     </select>
-                    <small class="error-message" id="category-error"></small>
+
+                    <small
+                        class="error-message"
+                        id="category-error">
+                    </small>
+
                 </div>
 
-                <button type="submit" class="primary-button" id="submit-button">Add Expense</button>
+
+                <!-- Add Button -->
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="submit-button"
+                >
+                    Add Expense
+                </button>
+
+
+                <!-- Clear Button -->
+                <button
+                    type="button"
+                    class="clear-button"
+                    id="clear-button"
+                >
+                    Clear
+                </button>
+
             </form>
+
         </section>
 
+
+        <!-- Expenses -->
         <section class="section" id="expenses">
+
             <div class="section-heading">
+
                 <div>
                     <p class="eyebrow">TRANSACTIONS</p>
                     <h2>Your expenses</h2>
                 </div>
-                <button type="button" class="secondary-button" id="refresh-button">Refresh</button>
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="refresh-button"
+                >
+                    Refresh
+                </button>
+
             </div>
 
-            <div id="loading-state" class="state-message hidden">Loading expenses...</div>
 
-            <div id="empty-state" class="state-message hidden">
+            <!-- Loading -->
+            <div
+                id="loading-state"
+                class="state-message hidden"
+            >
+                Loading expenses...
+            </div>
+
+
+            <!-- Empty -->
+            <div
+                id="empty-state"
+                class="state-message hidden"
+            >
+
                 <div>
-                    <h3>No expenses yet</h3>
-                    <p>Add your first expense to start tracking your spending.</p>
+
+                    <h3>
+                        No expenses yet
+                    </h3>
+
+                    <p>
+                        Add your first expense to start tracking
+                        your spending.
+                    </p>
+
                 </div>
+
             </div>
 
-            <div class="table-wrapper" id="expense-table-wrapper">
+
+            <!-- Expense Table -->
+            <div
+                class="table-wrapper"
+                id="expense-table-wrapper"
+            >
+
                 <table class="expense-table">
+
                     <thead>
+
                         <tr>
                             <th>Title</th>
                             <th>Category</th>
                             <th>Amount</th>
                             <th>Expense ID</th>
                         </tr>
+
                     </thead>
-                    <tbody id="expense-list"></tbody>
+
+                    <tbody id="expense-list">
+                    </tbody>
+
                 </table>
+
             </div>
+
         </section>
+
     </main>
 
-    <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+    <!-- Toast -->
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+
+    <!-- Footer -->
     <footer class="footer">
+
         <div class="container">
-            <p>Student Expense Tracker</p>
-            <span>Built with HTML, CSS, JavaScript &amp; AWS</span>
+
+            <p>
+                Student Expense Tracker
+            </p>
+
+            <span>
+                Built with HTML, CSS, JavaScript &amp; AWS
+            </span>
+
         </div>
+
     </footer>
 
-    <script>
-        const API_URL = "https://elkn232hpi.execute-api.ap-south-1.amazonaws.com/prod/expense";
 
-        const expenseForm = document.getElementById("expense-form");
-        const titleInput = document.getElementById("title");
-        const amountInput = document.getElementById("amount");
-        const categoryInput = document.getElementById("category");
-        const refreshButton = document.getElementById("refresh-button");
-        const expenseList = document.getElementById("expense-list");
-        const tableWrapper = document.getElementById("expense-table-wrapper");
-        const emptyState = document.getElementById("empty-state");
-        const loadingState = document.getElementById("loading-state");
-        const submitButton = document.getElementById("submit-button");
+    <!-- JavaScript -->
+    <script>
+
+        const API_URL =
+            "https://elkn232hpi.execute-api.ap-south-1.amazonaws.com/prod/expense";
+
+
+        /* DOM Elements */
+
+        const expenseForm =
+            document.getElementById("expense-form");
+
+        const titleInput =
+            document.getElementById("title");
+
+        const amountInput =
+            document.getElementById("amount");
+
+        const categoryInput =
+            document.getElementById("category");
+
+        const refreshButton =
+            document.getElementById("refresh-button");
+
+        const clearButton =
+            document.getElementById("clear-button");
+
+        const expenseList =
+            document.getElementById("expense-list");
+
+        const tableWrapper =
+            document.getElementById("expense-table-wrapper");
+
+        const emptyState =
+            document.getElementById("empty-state");
+
+        const loadingState =
+            document.getElementById("loading-state");
+
+        const submitButton =
+            document.getElementById("submit-button");
+
 
         let expenses = [];
 
+
+        /* UI Functions */
+
         const ExpenseUI = {
+
             showLoading() {
+
                 loadingState.classList.remove("hidden");
+
                 tableWrapper.classList.add("hidden");
+
                 emptyState.classList.add("hidden");
             },
+
+
             hideLoading() {
+
                 loadingState.classList.add("hidden");
             },
+
+
             clearValidationMessages() {
-                ["title", "amount", "category"].forEach((field) => {
-                    const input = document.getElementById(field);
-                    const message = document.getElementById(`${field}-error`);
-                    if (input) input.classList.remove("is-invalid");
-                    if (message) message.textContent = "";
+
+                [
+                    "title",
+                    "amount",
+                    "category"
+                ].forEach((field) => {
+
+                    const input =
+                        document.getElementById(field);
+
+                    const message =
+                        document.getElementById(
+                            `${field}-error`
+                        );
+
+                    if (input) {
+                        input.classList.remove(
+                            "is-invalid"
+                        );
+                    }
+
+                    if (message) {
+                        message.textContent = "";
+                    }
+
                 });
             },
+
+
             showValidationError(field, message) {
-                const input = document.getElementById(field);
-                const error = document.getElementById(`${field}-error`);
-                if (input) input.classList.add("is-invalid");
-                if (error) error.textContent = message;
+
+                const input =
+                    document.getElementById(field);
+
+                const error =
+                    document.getElementById(
+                        `${field}-error`
+                    );
+
+                if (input) {
+                    input.classList.add(
+                        "is-invalid"
+                    );
+                }
+
+                if (error) {
+                    error.textContent = message;
+                }
             },
+
+
             setSubmitLoading(isLoading) {
+
                 submitButton.disabled = isLoading;
-                submitButton.textContent = isLoading ? "Adding..." : "Add Expense";
+
+                submitButton.textContent =
+                    isLoading
+                        ? "Adding..."
+                        : "Add Expense";
             },
+
+
             renderDashboard(items, grandTotalValue) {
-                const expenseCount = document.getElementById("expense-count");
-                const grandTotal = document.getElementById("grand-total");
-                const highestExpense = document.getElementById("highest-expense");
 
-                const totalExpenses = Array.isArray(items) ? items.length : 0;
-                const totalAmount = Number.isFinite(Number(grandTotalValue)) ? Number(grandTotalValue) : items.reduce((sum, item) => sum + Number(item.amount || 0), 0);
-                const highest = items.length ? Math.max(...items.map((item) => Number(item.amount || 0))) : 0;
+                const expenseCount =
+                    document.getElementById(
+                        "expense-count"
+                    );
 
-                expenseCount.textContent = String(totalExpenses);
-                grandTotal.textContent = formatCurrency(totalAmount);
-                highestExpense.textContent = formatCurrency(highest);
+                const grandTotal =
+                    document.getElementById(
+                        "grand-total"
+                    );
+
+                const highestExpense =
+                    document.getElementById(
+                        "highest-expense"
+                    );
+
+
+                const totalExpenses =
+                    Array.isArray(items)
+                        ? items.length
+                        : 0;
+
+
+                const totalAmount =
+                    Number.isFinite(
+                        Number(grandTotalValue)
+                    )
+                        ? Number(grandTotalValue)
+                        : items.reduce(
+                            (sum, item) =>
+                                sum +
+                                Number(item.amount || 0),
+                            0
+                        );
+
+
+                const highest =
+                    items.length
+                        ? Math.max(
+                            ...items.map(
+                                (item) =>
+                                    Number(
+                                        item.amount || 0
+                                    )
+                            )
+                        )
+                        : 0;
+
+
+                expenseCount.textContent =
+                    String(totalExpenses);
+
+                grandTotal.textContent =
+                    formatCurrency(totalAmount);
+
+                highestExpense.textContent =
+                    formatCurrency(highest);
             },
+
+
             renderExpenses(items) {
-                const safeItems = Array.isArray(items) ? items : [];
+
+                const safeItems =
+                    Array.isArray(items)
+                        ? items
+                        : [];
+
 
                 if (!safeItems.length) {
+
                     expenseList.innerHTML = "";
-                    tableWrapper.classList.add("hidden");
-                    emptyState.classList.remove("hidden");
+
+                    tableWrapper.classList.add(
+                        "hidden"
+                    );
+
+                    emptyState.classList.remove(
+                        "hidden"
+                    );
+
                     return;
                 }
 
-                expenseList.innerHTML = safeItems.map((expense) => `
-                    <tr>
-                        <td>${escapeHtml(expense.title || "Untitled")}</td>
-                        <td>${escapeHtml(expense.category || "Other")}</td>
-                        <td class="amount-cell">${formatCurrency(Number(expense.amount || 0))}</td>
-                        <td>${escapeHtml(expense.expenseId || "N/A")}</td>
-                    </tr>
-                `).join("");
 
-                tableWrapper.classList.remove("hidden");
-                emptyState.classList.add("hidden");
+                expenseList.innerHTML =
+                    safeItems.map((expense) => `
+
+                        <tr>
+
+                            <td>
+                                ${escapeHtml(
+                                    expense.title ||
+                                    "Untitled"
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHtml(
+                                    expense.category ||
+                                    "Other"
+                                )}
+                            </td>
+
+                            <td class="amount-cell">
+                                ${formatCurrency(
+                                    Number(
+                                        expense.amount || 0
+                                    )
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHtml(
+                                    expense.expenseId ||
+                                    "N/A"
+                                )}
+                            </td>
+
+                        </tr>
+
+                    `).join("");
+
+
+                tableWrapper.classList.remove(
+                    "hidden"
+                );
+
+                emptyState.classList.add(
+                    "hidden"
+                );
             },
-            showToast(message, type = "success") {
-                const toast = document.getElementById("toast");
+
+
+            showToast(
+                message,
+                type = "success"
+            ) {
+
+                const toast =
+                    document.getElementById(
+                        "toast"
+                    );
+
                 toast.textContent = message;
-                toast.className = `toast show ${type}`;
-                clearTimeout(ExpenseUI.toastTimer);
-                ExpenseUI.toastTimer = setTimeout(() => {
-                    toast.className = "toast";
-                }, 2800);
+
+                toast.className =
+                    `toast show ${type}`;
+
+                clearTimeout(
+                    ExpenseUI.toastTimer
+                );
+
+                ExpenseUI.toastTimer =
+                    setTimeout(() => {
+
+                        toast.className =
+                            "toast";
+
+                    }, 2800);
             }
+
         };
 
+
+        /* Currency Formatting */
+
         function formatCurrency(value) {
-            const amount = Number(value || 0);
-            return new Intl.NumberFormat("en-IN", {
-                style: "currency",
-                currency: "INR",
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(amount);
+
+            const amount =
+                Number(value || 0);
+
+            return new Intl.NumberFormat(
+                "en-IN",
+                {
+                    style: "currency",
+                    currency: "INR",
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            ).format(amount);
         }
+
+
+        /* Prevent HTML Injection */
 
         function escapeHtml(value) {
+
             return String(value)
+
                 .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/\"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+
+                .replace(
+                    /\"/g,
+                    "&quot;"
+                )
+
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
         }
 
+
+        /* GET Expenses */
+
         async function loadExpenses() {
+
             ExpenseUI.showLoading();
 
             try {
-                const response = await fetch(API_URL);
+
+                const response =
+                    await fetch(API_URL);
+
+
                 if (!response.ok) {
-                    throw new Error(`Request failed with status ${response.status}`);
+
+                    throw new Error(
+                        `Request failed with status ${response.status}`
+                    );
                 }
 
-                const data = await response.json();
-                expenses = Array.isArray(data.expenses) ? data.expenses : [];
 
-                ExpenseUI.renderExpenses(expenses);
-                ExpenseUI.renderDashboard(expenses, data.grandTotal || 0);
+                const data =
+                    await response.json();
+
+
+                expenses =
+                    Array.isArray(data.expenses)
+                        ? data.expenses
+                        : [];
+
+
+                ExpenseUI.renderExpenses(
+                    expenses
+                );
+
+
+                ExpenseUI.renderDashboard(
+                    expenses,
+                    data.grandTotal || 0
+                );
+
+
             } catch (error) {
-                console.error("GET /expense error:", error);
+
+                console.error(
+                    "GET /expense error:",
+                    error
+                );
+
+
                 expenses = [];
-                ExpenseUI.renderExpenses([]);
-                ExpenseUI.renderDashboard([], 0);
-                ExpenseUI.showToast("Unable to load expenses. Please try again.", "error");
+
+
+                ExpenseUI.renderExpenses(
+                    []
+                );
+
+
+                ExpenseUI.renderDashboard(
+                    [],
+                    0
+                );
+
+
+                ExpenseUI.showToast(
+                    "Unable to load expenses. Please try again.",
+                    "error"
+                );
+
+
             } finally {
+
                 ExpenseUI.hideLoading();
             }
         }
 
-        function validateForm(title, amount, category) {
+
+        /* Form Validation */
+
+        function validateForm(
+            title,
+            amount,
+            category
+        ) {
+
             ExpenseUI.clearValidationMessages();
 
             let valid = true;
 
+
             if (!title.trim()) {
-                ExpenseUI.showValidationError("title", "Please enter an expense title.");
+
+                ExpenseUI.showValidationError(
+                    "title",
+                    "Please enter an expense title."
+                );
+
                 valid = false;
             }
+
 
             if (amount === "") {
-                ExpenseUI.showValidationError("amount", "Please enter an amount.");
+
+                ExpenseUI.showValidationError(
+                    "amount",
+                    "Please enter an amount."
+                );
+
                 valid = false;
-            } else if (!Number.isFinite(Number(amount))) {
-                ExpenseUI.showValidationError("amount", "Please enter a valid number.");
+
+            } else if (
+                !Number.isFinite(
+                    Number(amount)
+                )
+            ) {
+
+                ExpenseUI.showValidationError(
+                    "amount",
+                    "Please enter a valid number."
+                );
+
                 valid = false;
-            } else if (Number(amount) <= 0) {
-                ExpenseUI.showValidationError("amount", "Amount must be greater than 0.");
+
+            } else if (
+                Number(amount) <= 0
+            ) {
+
+                ExpenseUI.showValidationError(
+                    "amount",
+                    "Amount must be greater than 0."
+                );
+
                 valid = false;
             }
 
+
             if (!category) {
-                ExpenseUI.showValidationError("category", "Please select a category.");
+
+                ExpenseUI.showValidationError(
+                    "category",
+                    "Please select a category."
+                );
+
                 valid = false;
             }
+
 
             return valid;
         }
 
-        async function addExpense(title, amount, category) {
-            ExpenseUI.setSubmitLoading(true);
+
+        /* POST Expense */
+
+        async function addExpense(
+            title,
+            amount,
+            category
+        ) {
+
+            ExpenseUI.setSubmitLoading(
+                true
+            );
+
 
             try {
-                const response = await fetch(API_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        title: title.trim(),
-                        amount: Number(amount),
-                        category: category
-                    })
-                });
 
-                const data = await response.json();
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                title:
+                                    title.trim(),
+
+                                amount:
+                                    Number(amount),
+
+                                category:
+                                    category
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
 
                 if (!response.ok) {
-                    throw new Error(data.error || "Unable to add expense.");
+
+                    throw new Error(
+                        data.error ||
+                        "Unable to add expense."
+                    );
                 }
 
-                ExpenseUI.showToast("Expense added successfully!", "success");
+
+                ExpenseUI.showToast(
+                    "Expense added successfully!",
+                    "success"
+                );
+
+
                 expenseForm.reset();
+
                 ExpenseUI.clearValidationMessages();
+
+
                 await loadExpenses();
+
+
             } catch (error) {
-                console.error("POST /expense error:", error);
-                ExpenseUI.showToast(error.message || "Unable to add expense. Please try again.", "error");
+
+                console.error(
+                    "POST /expense error:",
+                    error
+                );
+
+
+                ExpenseUI.showToast(
+                    error.message ||
+                    "Unable to add expense. Please try again.",
+                    "error"
+                );
+
+
             } finally {
-                ExpenseUI.setSubmitLoading(false);
+
+                ExpenseUI.setSubmitLoading(
+                    false
+                );
             }
         }
 
-        expenseForm.addEventListener("submit", async function (event) {
-            event.preventDefault();
 
-            const title = titleInput.value;
-            const amount = amountInput.value;
-            const category = categoryInput.value;
+        /* Add Expense */
 
-            const valid = validateForm(title, amount, category);
-            if (!valid) {
-                return;
+        expenseForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const title =
+                    titleInput.value;
+
+                const amount =
+                    amountInput.value;
+
+                const category =
+                    categoryInput.value;
+
+
+                const valid =
+                    validateForm(
+                        title,
+                        amount,
+                        category
+                    );
+
+
+                if (!valid) {
+                    return;
+                }
+
+
+                await addExpense(
+                    title,
+                    amount,
+                    category
+                );
             }
+        );
 
-            await addExpense(title, amount, category);
-        });
 
-        refreshButton.addEventListener("click", loadExpenses);
-        document.addEventListener("DOMContentLoaded", loadExpenses);
+        /* Clear Form */
+
+        clearButton.addEventListener(
+            "click",
+            function() {
+
+                expenseForm.reset();
+
+                ExpenseUI.clearValidationMessages();
+
+                titleInput.focus();
+
+                ExpenseUI.showToast(
+                    "Form cleared.",
+                    "success"
+                );
+            }
+        );
+
+
+        /* Refresh */
+
+        refreshButton.addEventListener(
+            "click",
+            loadExpenses
+        );
+
+
+        /* Initial Load */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            loadExpenses
+        );
+
     </script>
+
 </body>
 </html>
