@@ -31,6 +31,9 @@ const categoryInput =
 const refreshButton =
     document.getElementById("refresh-button");
 
+const clearButton =
+    document.getElementById("clear-button");
+
 
 /*
  * Store currently loaded expenses
@@ -122,7 +125,6 @@ async function loadExpenses() {
 function validateForm(title, amount, category) {
 
     ExpenseUI.clearValidationMessages();
-
 
     let valid = true;
 
@@ -258,7 +260,7 @@ async function addExpense(title, amount, category) {
 
 
         /*
-         * Clear form
+         * Clear form after successful submission
          */
 
         expenseForm.reset();
@@ -354,6 +356,35 @@ refreshButton.addEventListener(
     "click",
     loadExpenses
 );
+
+
+/* =========================================
+   Clear Button
+========================================= */
+
+if (clearButton) {
+
+    clearButton.addEventListener(
+        "click",
+        function() {
+
+            /*
+             * Reset all form fields
+             */
+
+            expenseForm.reset();
+
+
+            /*
+             * Clear validation messages
+             */
+
+            ExpenseUI.clearValidationMessages();
+
+        }
+    );
+
+}
 
 
 /* =========================================
